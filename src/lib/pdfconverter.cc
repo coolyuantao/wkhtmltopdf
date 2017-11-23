@@ -79,7 +79,7 @@ PdfConverterPrivate::PdfConverterPrivate(PdfGlobal & s, PdfConverter & o) :
 	settings(s), pageLoader(s.load, settings.dpi, true),
 	out(o), printer(0), painter(0)
 #ifdef __EXTENSIVE_WKHTMLTOPDF_QT_HACK__
-	, webPrinter(0), measuringHFLoader(s.load, settings.dpi), hfLoader(s.load, settings.dpi), tocLoader1(s.load, settings.dpi), tocLoader2(s.load, settings.dpi)
+	, webPrinter(0), measuringHFLoader(s.load, settings.dpi, true), hfLoader(s.load, settings.dpi, true), tocLoader1(s.load, settings.dpi), tocLoader2(s.load, settings.dpi)
 	, tocLoader(&tocLoader1), tocLoaderOld(&tocLoader2)
     , outline(0), currentHeader(0), currentFooter(0)
 #endif
@@ -279,7 +279,7 @@ QPrinter * PdfConverterPrivate::createPrinter(const QString & tempFile) {
 
     printer->setOrientation(settings.orientation);
     printer->setColorMode(settings.colorMode);
-    printer->setCreator("wkhtmltopdf " STRINGIZE(FULL_VERSION));
+    printer->setCreator("SANGFOR UED TEAM");
 
     return printer;
 }
