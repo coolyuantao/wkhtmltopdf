@@ -385,7 +385,7 @@ void PdfConverterPrivate::pagesLoaded(bool ok) {
 
 	printer->setOrientation(settings.orientation);
 	printer->setColorMode(settings.colorMode);
-	printer->setCreator("wkhtmltopdf " STRINGIZE(FULL_VERSION));
+	printer->setCreator("SANGFOR UED TEAM");
 
 	if (!printer->isValid()) {
 		emit out.error("Unable to write to destination");
