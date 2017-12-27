@@ -407,9 +407,9 @@ void ResourceObject::amfinished(QNetworkReply * reply) {
 			//      no HTTP access at all, so we want network errors to be reported
 			//      with a higher priority than HTTP ones.
 			//      See: http://doc-snapshot.qt-project.org/4.8/qnetworkreply.html#NetworkError-enum
-			error(QString("Failed to load %1, with network status code %2 and http status code %3 - %4")
+			warning(QString("Failed to load %1, with network status code %2 and http status code %3 - %4")
 				.arg(reply->url().toString()).arg(networkStatus).arg(httpStatus).arg(reply->errorString()));
-			httpErrorCode = networkStatus > 0 ? (networkStatus + 1000) : httpStatus;
+			// httpErrorCode = networkStatus > 0 ? (networkStatus + 1000) : httpStatus;
 			return;
 		}
 		if (settings.mediaLoadErrorHandling == settings::LoadPage::abort)

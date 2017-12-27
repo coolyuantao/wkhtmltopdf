@@ -30,6 +30,7 @@ namespace wkhtmltopdf {
 namespace settings {
 
 QList<QString> LoadPage::mediaFilesExtensions = QList<QString> ()
+		<< "html"
 		<< "css"
 		<< "js"
 		<< "png"
