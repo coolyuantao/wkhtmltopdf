@@ -197,8 +197,6 @@ ResourceObject::ResourceObject(MultiPageLoaderPrivate & mpl, const QUrl & u, con
 	httpErrorCode(0),
 	settings(s) {
 
-	connect(&webPage, SIGNAL(setPageLoaderTimeout(), this, SLOT(setPageLoaderTimeout())));
-
 	connect(&networkAccessManager, SIGNAL(authenticationRequired(QNetworkReply*, QAuthenticator *)),this,
 	        SLOT(handleAuthenticationRequired(QNetworkReply *, QAuthenticator *)));
 	foreach (const QString & path, s.allowed)
@@ -206,6 +204,7 @@ ResourceObject::ResourceObject(MultiPageLoaderPrivate & mpl, const QUrl & u, con
 	if (url.scheme() == "file")
 		networkAccessManager.allow(url.toLocalFile());
 
+//	connect(&webPage, SIGNAL(setPageLoaderTimeout()), this, SLOT(setPageLoaderTimeout()));
 	connect(&webPage, SIGNAL(loadStarted()), this, SLOT(loadStarted()));
 	connect(&webPage, SIGNAL(loadProgress(int)), this, SLOT(loadProgress(int)));
 	connect(&webPage, SIGNAL(loadFinished(bool)), this, SLOT(loadFinished(bool)));
@@ -312,6 +311,8 @@ void ResourceObject::loadFinished(bool ok) {
 	}
 
 	bool isMain = multiPageLoader.isMainLoader;
+//	if (settings.pageLoaderTimeout) setPageLoaderTimeout();
+	setPageLoaderTimeout();
 
 	// Evaluate extra user supplied javascript for the main loader
 	if (isMain)
@@ -336,7 +337,8 @@ void ResourceObject::waitWindowStatus() {
 }
 
 void ResourceObject::setPageLoaderTimeout() {
-	QTimer::singleShot(settings.pageLoaderTimeout, this, SLOT(forceLoadDone()));
+//	QTimer::singleShot(settings.pageLoaderTimeout, this, SLOT(forceLoadDone()));
+	QTimer::singleShot(1200000, this, SLOT(forceLoadDone()));
 }
 
 void ResourceObject::printRequested(QWebFrame *) {
