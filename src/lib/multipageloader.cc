@@ -261,6 +261,7 @@ ResourceObject::ResourceObject(MultiPageLoaderPrivate & mpl, const QUrl & u, con
  * Once loading starting, this is called
  */
 void ResourceObject::loadStarted() {
+	setPageLoaderTimeout();
 	if (finished == true) {
 		++multiPageLoader.loading;
 		finished = false;
@@ -312,7 +313,7 @@ void ResourceObject::loadFinished(bool ok) {
 
 	bool isMain = multiPageLoader.isMainLoader;
 //	if (settings.pageLoaderTimeout) setPageLoaderTimeout();
-	setPageLoaderTimeout();
+//	setPageLoaderTimeout();
 
 	// Evaluate extra user supplied javascript for the main loader
 	if (isMain)
