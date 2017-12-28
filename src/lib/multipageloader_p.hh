@@ -103,6 +103,7 @@ public slots:
 	void printRequested(QWebFrame * frame);
 	void loadDone();
 	void forceLoadDone();
+	void setPageLoaderTimeout();
 	void handleAuthenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator);
 	void warning(const QString & str);
 	void error(const QString & str);

@@ -197,7 +197,7 @@ ResourceObject::ResourceObject(MultiPageLoaderPrivate & mpl, const QUrl & u, con
 	httpErrorCode(0),
 	settings(s) {
 
-	QTimer::singleShot(settings.pageLoaderTimeout, this, SLOT(forceLoadDone()));
+	connect(&webPage, SIGNAL(setPageLoaderTimeout(), this, SLOT(setPageLoaderTimeout())));
 
 	connect(&networkAccessManager, SIGNAL(authenticationRequired(QNetworkReply*, QAuthenticator *)),this,
 	        SLOT(handleAuthenticationRequired(QNetworkReply *, QAuthenticator *)));
@@ -333,6 +333,10 @@ void ResourceObject::waitWindowStatus() {
 	} else {
 		QTimer::singleShot(settings.jsdelay, this, SLOT(loadDone()));
 	}
+}
+
+void ResourceObject::setPageLoaderTimeout() {
+	QTimer::singleShot(settings.pageLoaderTimeout, this, SLOT(forceLoadDone()));
 }
 
 void ResourceObject::printRequested(QWebFrame *) {
