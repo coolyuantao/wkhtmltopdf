@@ -217,6 +217,7 @@ void CommandLineParserBase::addPageLoadArgs(LoadPage & s) {
 	addarg("no-custom-header-propagation",0,"Do not add HTTP headers specified by --custom-header for each resource request.", new ConstSetter<bool>(s.repeatCustomHeaders, true));
 
 	addarg("javascript-delay",0,"Wait some milliseconds for javascript finish", new IntSetter(s.jsdelay,"msec"));
+	addarg("page-loader-timeout",0,"Set timeout and wait some milliseconds for page loader", new IntSetter(s.pageLoaderTimeout,"msec"));
 	addarg("window-status",0,"Wait until window.status is equal to this string before rendering page", new QStrSetter(s.windowStatus, "windowStatus"));
 
 	addarg("zoom",0,"Use this zoom factor", new FloatSetter(s.zoomFactor,"float",1.0));

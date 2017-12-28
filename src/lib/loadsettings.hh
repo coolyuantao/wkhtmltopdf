@@ -82,6 +82,8 @@ struct DLL_PUBLIC LoadPage {
 	//! How many milliseconds should we wait for a Javascript redirect
 	int jsdelay;
 
+	int pageLoaderTimeout;
+
 	//! What window.status value should we wait for
 	QString windowStatus;
 
