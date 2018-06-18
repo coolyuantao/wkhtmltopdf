@@ -1,4 +1,9 @@
-v0.12.5 (unreleased)
+
+v0.12.6 (unreleased)
+--------------------
+* **#3953**: fix TOC and other special pages not present in output PDF (#3962)
+
+v0.12.5 (2018-06-11)
 --------------------
 * fixed build without patched Qt and integrate with Travis CI and AppVeyor
 * **#1524**: **[qt]** partial fix for overlapping text when repeating headers/footers in table (qt#29)

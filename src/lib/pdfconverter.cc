@@ -79,11 +79,7 @@ PdfConverterPrivate::PdfConverterPrivate(PdfGlobal & s, PdfConverter & o) :
 	settings(s), pageLoader(s.load, settings.dpi, true),
 	out(o), printer(0), painter(0)
 #ifdef __EXTENSIVE_WKHTMLTOPDF_QT_HACK__
-<<<<<<< HEAD
-	, webPrinter(0), measuringHFLoader(s.load, settings.dpi, true), hfLoader(s.load, settings.dpi, true), tocLoader1(s.load, settings.dpi), tocLoader2(s.load, settings.dpi)
-=======
-	, measuringHFLoader(s.load, settings.dpi), hfLoader(s.load, settings.dpi), tocLoader1(s.load, settings.dpi), tocLoader2(s.load, settings.dpi)
->>>>>>> 6f77c46... use same QWebPrinter instance in "counting" and "printing" phases
+	, measuringHFLoader(s.load, settings.dpi, true), hfLoader(s.load, settings.dpi, true), tocLoader1(s.load, settings.dpi), tocLoader2(s.load, settings.dpi)
 	, tocLoader(&tocLoader1), tocLoaderOld(&tocLoader2)
     , outline(0), currentHeader(0), currentFooter(0)
 #endif
@@ -891,8 +887,13 @@ void PdfConverterPrivate::beginPrintObject(PageObject & obj) {
 		endPrintObject(objects[obj.number-1]);
 	currentObject = obj.number;
 
+	if (!obj.loaderObject || obj.loaderObject->skip)
+		return;
+
 	QWebPrinter *webPrinter = objects[currentObject].web_printer;
-	if (!obj.loaderObject || obj.loaderObject->skip || webPrinter == 0) return;
+	if (webPrinter == 0)
+		webPrinter = objects[currentObject].web_printer = \
+			new QWebPrinter(obj.page->mainFrame(), printer, *painter);
 
 	QPalette pal = obj.loaderObject->page.palette();
 	pal.setBrush(QPalette::Base, Qt::transparent);
