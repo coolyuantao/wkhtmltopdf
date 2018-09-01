@@ -292,6 +292,10 @@ CAPI(int) wkhtmltopdf_init(int use_graphics) {
 		char * arg[] = {x, 0};
 		int aa = 1;
 
+#if QT_VERSION >= 0x050000 && defined(Q_OS_UNIX) && !defined(__EXTENSIVE_WKHTMLTOPDF_QT_HACK__)
+		setenv("QT_QPA_PLATFORM", "offscreen", 0);
+#endif
+
 		bool ug = true;
 #if defined(Q_OS_UNIX) || defined(Q_OS_MAC)
 #ifdef __EXTENSIVE_WKHTMLTOPDF_QT_HACK__
@@ -304,6 +308,7 @@ CAPI(int) wkhtmltopdf_init(int use_graphics) {
 		Q_UNUSED(use_graphics);
 #endif
 		a = new QApplication(aa, arg, ug);
+		a->setApplicationName(x);
 		MyLooksStyle * style = new MyLooksStyle();
 		a->setStyle(style);
 	}

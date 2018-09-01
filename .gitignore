@@ -17,8 +17,7 @@ Makefile
 qrc_wkhtmltopdf.cpp
 Makefile.*
 *_resource.rc
-gitcontrol.bat
-gitcmd.lnk
-*.tar.bz2
-*.pyc
 .vscode/
+*.o
+moc_*.*
+.qmake*

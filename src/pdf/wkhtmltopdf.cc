@@ -30,9 +30,9 @@
 #include <qapplication.h>
 #include <qglobal.h>
 #include <string.h>
-#include <wkhtmltox/pdfconverter.hh>
-#include <wkhtmltox/pdfsettings.hh>
-#include <wkhtmltox/utilities.hh>
+#include <pdfconverter.hh>
+#include <pdfsettings.hh>
+#include <utilities.hh>
 
 #if defined(Q_OS_UNIX)
 #include <locale.h>
@@ -165,6 +165,9 @@ char * fgets_large(FILE * fp)
 int main(int argc, char * argv[]) {
 #if defined(Q_OS_UNIX)
 	setlocale(LC_ALL, "");
+#if QT_VERSION >= 0x050000 && !defined(__EXTENSIVE_WKHTMLTOPDF_QT_HACK__)
+	setenv("QT_QPA_PLATFORM", "offscreen", 0);
+#endif
 #endif
 	//This will store all our settings
 	PdfGlobal globalSettings;

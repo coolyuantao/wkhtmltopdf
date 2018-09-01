@@ -22,9 +22,9 @@
 #include "progressfeedback.hh"
 #include <QApplication>
 #include <QWebFrame>
-#include <wkhtmltox/imageconverter.hh>
-#include <wkhtmltox/imagesettings.hh>
-#include <wkhtmltox/utilities.hh>
+#include <imageconverter.hh>
+#include <imagesettings.hh>
+#include <utilities.hh>
 
 #if defined(Q_OS_UNIX)
 #include <locale.h>
@@ -33,6 +33,9 @@
 int main(int argc, char** argv) {
 #if defined(Q_OS_UNIX)
 	setlocale(LC_ALL, "");
+#if QT_VERSION >= 0x050000 && !defined(__EXTENSIVE_WKHTMLTOPDF_QT_HACK__)
+	setenv("QT_QPA_PLATFORM", "offscreen", 0);
+#endif
 #endif
 	//This will store all our settings
 	wkhtmltopdf::settings::ImageGlobal settings;
