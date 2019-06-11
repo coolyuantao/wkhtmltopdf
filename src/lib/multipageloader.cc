@@ -338,8 +338,8 @@ void ResourceObject::waitWindowStatus() {
 }
 
 void ResourceObject::setPageLoaderTimeout() {
-//	QTimer::singleShot(settings.pageLoaderTimeout, this, SLOT(forceLoadDone()));
-	QTimer::singleShot(1200000, this, SLOT(forceLoadDone()));
+	QTimer::singleShot(settings.pageLoaderTimeout, this, SLOT(forceLoadDone()));
+	// QTimer::singleShot(1200000, this, SLOT(forceLoadDone()));
 }
 
 void ResourceObject::printRequested(QWebFrame *) {

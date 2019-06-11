@@ -138,7 +138,7 @@ LoadGlobal::LoadGlobal():
 
 LoadPage::LoadPage():
 	jsdelay(200),
-	pageLoaderTimeout(0),
+	pageLoaderTimeout(1200000),
 	windowStatus(""),
 	zoomFactor(1.0),
 	repeatCustomHeaders(false),
